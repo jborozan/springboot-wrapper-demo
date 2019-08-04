@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  karaf:
+    container_name: karaf
+    image: karaf-4.2.6
+    build: ./karaf/build
+    ports:
+      - 8181:8181
+    volumes:
+      - /Developer/Projects/Eclipse/workspace/springboot-wrapper-demo/bundle-api/target/bundle-api-0.0.1-SNAPSHOT.jar:/usr/apache-karaf-4.2.6/deploy/bundle-api.jar
+      - /Developer/Projects/Eclipse/workspace/springboot-wrapper-demo/bundle-one/target/bundle-one-0.0.1-SNAPSHOT.jar:/usr/apache-karaf-4.2.6/deploy/bundle-one.jar
+      - /Developer/Projects/Eclipse/workspace/springboot-wrapper-demo/bundle-two/target/bundle-two-0.0.1-SNAPSHOT.jar:/usr/apache-karaf-4.2.6/deploy/bundle-two.jar
+      - /Users/jurica/.m2:/root/.m2
+      - /Developer/Projects/Eclipse/workspace/springboot-wrapper-demo/karaf-docker/target/docker/karaf/etc/bundleone.cfg:/usr/apache-karaf-4.2.6/etc/bundleone.cfg
+      - /Developer/Projects/Eclipse/workspace/springboot-wrapper-demo/karaf-docker/target/docker/karaf/etc/bundletwo.cfg:/usr/apache-karaf-4.2.6/etc/bundletwo.cfg
+    networks:
+      - karaf_net
+
+networks:
+  karaf_net:
+    driver: bridge      

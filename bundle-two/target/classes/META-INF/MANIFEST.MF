@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1564950382815
+Build-Jdk: 1.8.0_102
+Built-By: jurica
+Bundle-Blueprint: OSGI-INF/blueprint/blueprint.xml
+Bundle-Description: Bundle 2 for this demo
+Bundle-ManifestVersion: 2
+Bundle-Name: bundle-two
+Bundle-SymbolicName: bundle-two
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: net.borozan.bundletwo;uses:="javax.servlet,javax.servlet
+ .http,net.borozan.bundleapi,org.osgi.service.cm";version="0.0.1"
+Export-Service: org.osgi.service.cm.ManagedService;service.pid=bundletwo
+ ;osgi.service.blueprint.compname=serviceTwoImpl,javax.servlet.http.Http
+ Servlet;alias=/message;osgi.service.blueprint.compname=serviceTwoImpl
+Import-Package: org.osgi.service.cm;version="[1.5,2)",javax.servlet;vers
+ ion="[3.1,4)",javax.servlet.http;version="[3.1,4)",net.borozan.bundleap
+ i;version="[0.0,1)"
+Import-Service: net.borozan.bundleapi.Service;multiple:=false;availabili
+ ty:=optional
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-4.2.0.201903051501

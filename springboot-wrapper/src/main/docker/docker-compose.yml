@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  springboot-wrapper:
+    container_name: wrapper
+    image: maven:3.6-jdk-8-alpine
+    ports:
+      - 9090:8080
+    volumes:
+      - ${project.basedir}/target/classes/springboot-wrapper.xml:/springboot-wrapper.xml
+      - ${project.basedir}/target/classes/bundleone.cfg:/bundleone.cfg
+      - ${project.basedir}/target/classes/bundletwo.cfg:/bundletwo.cfg
+      - ${project.basedir}/target/${project.build.finalName}.jar:/springboot-wrapper.jar
+      - ${project.parent.basedir}/bundle-one/target/bundle-one-${project.version}.jar:/bundleone.jar
+    environment:
+      - CONFIG_PATH=/.
+      - LOADER_PATH=/bundleone.jar
+    command: java -jar /springboot-wrapper.jar
+    networks:
+      - spring_net
+
+networks:
+  spring_net:
+    driver: bridge

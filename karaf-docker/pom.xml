@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>net.borozan</groupId>
+        <artifactId>springboot-wrapper-demo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>karaf-docker</artifactId>
+    <description>Prepares docker compose with karaf to run bundles</description>
+    
+    <properties>
+        <karaf.version>4.2.6</karaf.version>
+        <docker.base.image>alpine:3.9</docker.base.image>
+    </properties>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>prepare-docker-files</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/docker</outputDirectory>
+                            <resources>
+					            <resource>
+					                    <directory>src/main/docker</directory>
+					                    <filtering>true</filtering>
+					            </resource>
+					        </resources>
+				        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins> 
+    </build>
+    
+</project>

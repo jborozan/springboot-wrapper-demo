@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.borozan</groupId>
+    <artifactId>springboot-wrapper-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>Demonstration of Springboot wrapper for OSGI</description>
+    <packaging>pom</packaging>
+    
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+  
+    <modules>
+        <module>bundle-api</module>
+    	<module>bundle-one</module>
+    	<module>bundle-two</module>
+        <module>karaf-docker</module>    	
+        <module>springboot-wrapper</module>
+    </modules>
+</project>

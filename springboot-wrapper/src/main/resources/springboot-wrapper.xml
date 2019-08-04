@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd          
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- scan annotation created beans -->
+    <context:component-scan base-package="net.borozan.springboot"/>
+            
+    <!-- just like in OSGI property-placeholder counterpart, with some small differences -->
+    <context:property-placeholder location="file:${CONFIG_PATH}/bundleone.cfg" ignore-unresolvable="true" ignore-resource-not-found="true" />
+
+    <!-- create bean service and set greeting property from read properties -->
+    <bean id="serviceOneImpl" class="net.borozan.bundleone.impl.ServiceImpl">
+        <property name="greetingMessage" value="${greeting.message.from.properties}" />
+    </bean>
+    
+    <!-- create service bean and set "service" from bundle one to property -->        
+    <bean id="serviceTwoImpl" class="net.borozan.bundletwo.ServiceImpl">
+        <property name="service" ref="serviceOneImpl" />
+    </bean>
+
+    <!-- first create properties object from file -->
+    <util:properties id="bundleTwoProperties" location="file:${CONFIG_PATH}/bundletwo.cfg" ignore-resource-not-found="true" />
+
+    <!-- then apply them to the object with appropriate interface implementation, in this case serviceTwoImpl -->
+    <!-- for each properties file, one UpdatePropertiesToManagedService must be created -->    
+    <bean id="propertiesToManagedService1" class="net.borozan.springboot.UpdatePropertiesToManagedService">
+        <property name="properties" ref="bundleTwoProperties" />
+        <property name="managedService" ref="serviceTwoImpl" />
+    </bean>
+    
+    <!-- servlets registrations -->
+    <!-- for each URL it is one ServletRegistrationBean with unique name required -->
+    <bean id="servletRegistration1" class="org.springframework.boot.web.servlet.ServletRegistrationBean">
+        <constructor-arg ref="serviceTwoImpl" />
+        <constructor-arg value="/message/*" />
+        <property name="name" value="serviceTwoImpl" />
+        <property name="loadOnStartup" value="1" />
+    </bean>
+    
+</beans>

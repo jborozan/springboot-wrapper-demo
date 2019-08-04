@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  karaf:
+    container_name: karaf
+    image: karaf-${karaf.version}
+    build: ./karaf/build
+    ports:
+      - 8181:8181
+    volumes:
+      - ${project.parent.basedir}/bundle-api/target/bundle-api-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-api.jar
+      - ${project.parent.basedir}/bundle-one/target/bundle-one-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-one.jar
+      - ${project.parent.basedir}/bundle-two/target/bundle-two-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-two.jar
+      - ${user.home}/.m2:/root/.m2
+      - ${project.basedir}/target/docker/karaf/etc/bundleone.cfg:/usr/apache-karaf-${karaf.version}/etc/bundleone.cfg
+      - ${project.basedir}/target/docker/karaf/etc/bundletwo.cfg:/usr/apache-karaf-${karaf.version}/etc/bundletwo.cfg
+    networks:
+      - karaf_net
+
+networks:
+  karaf_net:
+    driver: bridge      

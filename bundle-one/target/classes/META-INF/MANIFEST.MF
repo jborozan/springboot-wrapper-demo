@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1564950382371
+Build-Jdk: 1.8.0_102
+Built-By: jurica
+Bundle-Blueprint: OSGI-INF/blueprint/blueprint.xml
+Bundle-Description: Bundle 1 for this demo
+Bundle-ManifestVersion: 2
+Bundle-Name: bundle-one
+Bundle-SymbolicName: bundle-one
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Service: net.borozan.bundleapi.Service;osgi.service.blueprint.com
+ pname=serviceImpl
+Import-Package: net.borozan.bundleapi;version="[0.0,1)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-4.2.0.201903051501
