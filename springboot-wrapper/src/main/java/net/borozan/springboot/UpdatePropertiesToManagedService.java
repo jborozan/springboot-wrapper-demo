@@ -25,14 +25,14 @@ public class UpdatePropertiesToManagedService {
         
     	// be cautious, and check nulls always
         Optional.ofNullable(properties)
-            .ifPresent( p -> {
+            .ifPresent( props -> {
                 
                 // update service with properties
                 Optional.ofNullable(managedService)
                     .ifPresent( ms -> {                       
                         try {
                             // works like this
-                            ms.updated((Dictionary) p);
+                            ms.updated((Dictionary) props);
                         } catch (Exception ignore) {}
                     } );
             } );
@@ -65,5 +65,4 @@ public class UpdatePropertiesToManagedService {
         // and apply
         apply();
     }
-
 }

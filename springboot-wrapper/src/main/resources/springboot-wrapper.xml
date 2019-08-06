@@ -17,7 +17,7 @@
     <context:property-placeholder location="file:${CONFIG_PATH}/bundleone.cfg" ignore-unresolvable="true" ignore-resource-not-found="true" />
 
     <!-- create bean service and set greeting property from read properties -->
-    <bean id="serviceOneImpl" class="net.borozan.bundleone.impl.ServiceImpl">
+    <bean id="serviceOneImpl" class="net.borozan.bundleone.ServiceImpl">
         <property name="greetingMessage" value="${greeting.message.from.properties}" />
     </bean>
     

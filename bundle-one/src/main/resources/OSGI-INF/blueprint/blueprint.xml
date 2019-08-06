@@ -10,11 +10,11 @@
     <cm:property-placeholder persistent-id="bundleone" />
     
     <!-- create bean service and set greeting property from read properties -->
-    <bean id="serviceImpl" class="net.borozan.bundleone.impl.ServiceImpl">
+    <bean id="serviceOneImpl" class="net.borozan.bundleone.ServiceImpl">
         <property name="greetingMessage" value="${greeting.message.from.properties}" />
     </bean>
     
     <!-- export it as service -->
-    <service interface="net.borozan.bundleapi.Service" ref="serviceImpl" />
+    <service interface="net.borozan.bundleapi.Service" ref="serviceOneImpl" />
 
 </blueprint>

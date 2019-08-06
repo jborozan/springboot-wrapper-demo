@@ -1,0 +1,13 @@
+@startuml
+
+service - [bundle-api]: defines
+[bundle-one-a] ..> service: implements
+[bundle-one-b] ..> service: implements
+[bundle-one-c] ..> service: implements
+service <.. [bundle-two] : uses
+[bundle-two] ..> managedService: registers
+[bundle-two] ..> servlet: registers
+managedService -down- [OSGI admin]: provides
+servlet -down- [OSGI http]: provides
+
+@enduml

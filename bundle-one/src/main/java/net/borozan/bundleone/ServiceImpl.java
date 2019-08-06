@@ -1,4 +1,4 @@
-package net.borozan.bundleone.impl;
+package net.borozan.bundleone;
 
 import net.borozan.bundleapi.Service;
 
