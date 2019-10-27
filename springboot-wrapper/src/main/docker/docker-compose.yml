@@ -10,6 +10,7 @@ services:
       - ${project.basedir}/target/classes/springboot-wrapper.xml:/springboot-wrapper.xml
       - ${project.basedir}/target/classes/bundleone.cfg:/bundleone.cfg
       - ${project.basedir}/target/classes/bundletwo.cfg:/bundletwo.cfg
+      - ${project.basedir}/target/classes/bundlethree.cfg:/bundlethree.cfg
       - ${project.basedir}/target/${project.build.finalName}.jar:/springboot-wrapper.jar
       - ${project.parent.basedir}/bundle-one/target/bundle-one-${project.version}.jar:/bundleone.jar
     environment:

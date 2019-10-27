@@ -31,7 +31,7 @@
 
     <!-- then apply them to the object with appropriate interface implementation, in this case serviceTwoImpl -->
     <!-- for each properties file, one UpdatePropertiesToManagedService must be created -->    
-    <bean id="propertiesToManagedService1" class="net.borozan.springboot.UpdatePropertiesToManagedService">
+    <bean id="propertiesToManagedServiceTwoImpl" class="net.borozan.springboot.UpdatePropertiesToManagedService">
         <property name="properties" ref="bundleTwoProperties" />
         <property name="managedService" ref="serviceTwoImpl" />
     </bean>
@@ -40,9 +40,36 @@
     <!-- for each URL it is one ServletRegistrationBean with unique name required -->
     <bean id="servletRegistration1" class="org.springframework.boot.web.servlet.ServletRegistrationBean">
         <constructor-arg ref="serviceTwoImpl" />
-        <constructor-arg value="/message/*" />
+        <constructor-arg value="/message2/*" />
         <property name="name" value="serviceTwoImpl" />
         <property name="loadOnStartup" value="1" />
     </bean>
     
+    <!-- create 2nd service bean and set "service" from bundle one to property -->        
+    <bean id="serviceThreeImpl" class="net.borozan.bundlethree.ServiceImpl" />    
+    
+    <!-- bind services together per adapter -->
+    <bean id="bindToServiceThreeImpl" class="net.borozan.springboot.BindAdapter">
+        <property name="referenceListener" ref="serviceThreeImpl" />
+        <property name="bindMethodName" value="addService" />
+        <property name="service" ref="serviceOneImpl" />
+    </bean>
+    
+    <!-- again create properties object from file -->
+    <util:properties id="bundleThreeProperties" location="file:${CONFIG_PATH}/bundlethree.cfg" ignore-resource-not-found="true" />
+
+    <bean id="propertiesToManagedServiceThreeImpl" class="net.borozan.springboot.UpdatePropertiesToManagedService">
+        <property name="properties" ref="bundleThreeProperties" />
+        <property name="managedService" ref="serviceThreeImpl" />
+    </bean>
+
+    <!-- servlets registrations -->
+    <!-- for each URL it is one ServletRegistrationBean with unique name required -->
+    <bean id="servletRegistration2" class="org.springframework.boot.web.servlet.ServletRegistrationBean">
+        <constructor-arg ref="serviceThreeImpl" />
+        <constructor-arg value="/message3/*" />
+        <property name="name" value="serviceThreeImpl" />
+        <property name="loadOnStartup" value="1" />
+    </bean>
+        
 </beans>

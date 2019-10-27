@@ -11,9 +11,11 @@ services:
       - ${project.parent.basedir}/bundle-api/target/bundle-api-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-api.jar
       - ${project.parent.basedir}/bundle-one/target/bundle-one-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-one.jar
       - ${project.parent.basedir}/bundle-two/target/bundle-two-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-two.jar
+      - ${project.parent.basedir}/bundle-three/target/bundle-three-${project.version}.jar:/usr/apache-karaf-${karaf.version}/deploy/bundle-three.jar
       - ${user.home}/.m2:/root/.m2
       - ${project.basedir}/target/docker/karaf/etc/bundleone.cfg:/usr/apache-karaf-${karaf.version}/etc/bundleone.cfg
       - ${project.basedir}/target/docker/karaf/etc/bundletwo.cfg:/usr/apache-karaf-${karaf.version}/etc/bundletwo.cfg
+      - ${project.basedir}/target/docker/karaf/etc/bundlethree.cfg:/usr/apache-karaf-${karaf.version}/etc/bundlethree.cfg
     networks:
       - karaf_net
 

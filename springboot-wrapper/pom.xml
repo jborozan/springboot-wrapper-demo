@@ -21,6 +21,11 @@
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>6.0.0</version>
+        </dependency>        
+        <dependency>
+            <groupId>org.osgi</groupId>
             <artifactId>osgi.cmpn</artifactId>
             <version>6.0.0</version>
         </dependency>
@@ -39,6 +44,11 @@
         <dependency>
             <groupId>net.borozan</groupId>
             <artifactId>bundle-two</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.borozan</groupId>
+            <artifactId>bundle-three</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         
@@ -119,8 +129,8 @@
                             <outputDirectory>target/docker</outputDirectory>
                             <resources>
                                 <resource>
-                                        <directory>src/main/docker</directory>
-                                        <filtering>true</filtering>
+	                                <directory>src/main/docker</directory>
+	                                <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>

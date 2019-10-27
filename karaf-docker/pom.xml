@@ -31,12 +31,12 @@
                         <configuration>
                             <outputDirectory>target/docker</outputDirectory>
                             <resources>
-					            <resource>
-					                    <directory>src/main/docker</directory>
-					                    <filtering>true</filtering>
-					            </resource>
-					        </resources>
-				        </configuration>
+                                <resource>
+                                    <directory>src/main/docker</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

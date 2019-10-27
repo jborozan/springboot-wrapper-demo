@@ -6,26 +6,26 @@
                                http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 
                                http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
 
-    <!-- set reference to service from bundle-one -->
-    <reference id="bundleOneService" interface="net.borozan.bundleapi.Service" availability="optional" />
-
-    <!-- create service bean and set service from bundle one to property -->        
-    <bean id="serviceTwoImpl" class="net.borozan.bundletwo.ServiceImpl">
-        <property name="service" ref="bundleOneService" />
-    </bean>
-
+    <!-- create service bean -->        
+    <bean id="serviceThreeImpl" class="net.borozan.bundlethree.ServiceImpl" />
+    
+    <!-- reference listeners to service from bundle-one -->
+    <reference-list id="bundleOneServices" interface="net.borozan.bundleapi.Service" availability="optional">
+        <reference-listener bind-method="addService" unbind-method="removeService" ref="serviceThreeImpl"/>
+    </reference-list>
+    
     <!-- OGSI Managed service usage: read properties to bean -->
-    <service interface="org.osgi.service.cm.ManagedService" ref="serviceTwoImpl">
+    <service interface="org.osgi.service.cm.ManagedService" ref="serviceThreeImpl">
         <service-properties>
             <!-- unfortunately *.cfgs only -->
-            <entry key="service.pid" value="bundletwo"/>
+            <entry key="service.pid" value="bundleThree"/>
         </service-properties>
     </service>
 
     <!-- HTTP OSGI Services: export bean content via http servlet -->
-    <service interface="javax.servlet.http.HttpServlet" ref="serviceTwoImpl">
+    <service interface="javax.servlet.http.HttpServlet" ref="serviceThreeImpl">
         <service-properties>
-            <entry key="alias" value="/message2"/>
+            <entry key="alias" value="/message3"/>
         </service-properties>
     </service>
 

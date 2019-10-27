@@ -15,6 +15,7 @@
         <module>bundle-api</module>
     	<module>bundle-one</module>
     	<module>bundle-two</module>
+    	<module>bundle-three</module>
         <module>karaf-docker</module>    	
         <module>springboot-wrapper</module>
     </modules>
